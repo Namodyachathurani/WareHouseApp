@@ -1,0 +1,305 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WareHouseApp_Desktop"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="780"
+        x:Class="WareHouseApp_Desktop.MainWindow"
+        Title="Warehouse Management System (C# .NET Desktop Application)"
+        Width="1200" Height="780"
+        WindowStartupLocation="CenterScreen"
+        Background="#0F172A">
+
+    <Grid RowDefinitions="Auto, *">
+        <!-- Top App Header -->
+        <Border Grid.Row="0" Background="#1E293B" BorderBrush="#334155" BorderThickness="0,0,0,1" Padding="20,14">
+            <Grid ColumnDefinitions="Auto, *, Auto">
+                <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="WAREHOUSE MANAGEMENT SYSTEM" FontSize="18" FontWeight="Bold" Foreground="#F8FAFC" LetterSpacing="0.5"/>
+                    <TextBlock Text="Object-Oriented Architecture - .NET Desktop Application" FontSize="12" Foreground="#94A3B8"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border Background="#0F172A" BorderBrush="#38BDF8" BorderThickness="1" CornerRadius="6" Padding="12,6">
+                        <TextBlock x:Name="TxtCurrentUser" Text="Active Session: Administrator (Security Level 3)" FontSize="12" FontWeight="SemiBold" Foreground="#38BDF8"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <Button x:Name="BtnRunAutoDemo" Content="*" Background="#334155" Foreground="#94A3B8" FontWeight="Bold" FontSize="14" Padding="10,4" CornerRadius="4" Click="BtnRunAutoDemo_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Tab Control -->
+        <TabControl x:Name="MainTabControl" Grid.Row="1" Background="#0F172A" Margin="10,6,10,10">
+            <!-- TAB 1: System Overview -->
+            <TabItem Header="System Overview" FontSize="13" FontWeight="SemiBold">
+                <ScrollViewer Margin="10">
+                    <StackPanel Spacing="16">
+                        <!-- Key Metric Cards -->
+                        <Grid ColumnDefinitions="*, *, *, *" Margin="0,4,0,10">
+                            <Border Grid.Column="0" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="4">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="Total Inventory Units" FontSize="11" Foreground="#94A3B8" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtMetricStockCount" Text="284 Units" FontSize="22" FontWeight="Bold" Foreground="#38BDF8"/>
+                                    <TextBlock Text="Across 5 Active SKU Batches" FontSize="10" Foreground="#64748B"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Column="1" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="4">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="Low Stock Warnings" FontSize="11" Foreground="#94A3B8" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtMetricLowStock" Text="2 Items" FontSize="22" FontWeight="Bold" Foreground="#F87171"/>
+                                    <TextBlock Text="Stock at or below Safety Threshold" FontSize="10" Foreground="#64748B"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Column="2" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="4">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="Commercial Customers" FontSize="11" Foreground="#94A3B8" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtMetricCustomers" Text="3 Accounts" FontSize="22" FontWeight="Bold" Foreground="#34D399"/>
+                                    <TextBlock Text="Turnover-Based Credit Limits" FontSize="10" Foreground="#64748B"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Column="3" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="4">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="Total Inventory Valuation" FontSize="11" Foreground="#94A3B8" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtMetricValuation" Text="Rs. 2,674,000" FontSize="22" FontWeight="Bold" Foreground="#FBBF24"/>
+                                    <TextBlock Text="Valuation based on Unit Cost" FontSize="10" Foreground="#64748B"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <!-- System Status & Activity Log -->
+                        <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="System Verification and Activity Log" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                <TextBlock Text="Real-time transaction tracking, OOP inheritance dispatch, and SQLite database audits." FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtActivityLog" Height="260" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" Background="#0F172A" Foreground="#38BDF8" FontFamily="Courier New, Menlo, Monospace" FontSize="12" Padding="10"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- TAB 2: Inventory Management -->
+            <TabItem Header="Inventory Management" FontSize="13" FontWeight="SemiBold">
+                <Grid ColumnDefinitions="360, *" Margin="10">
+                    <!-- Left: Add / Update Stock Item Form -->
+                    <Border Grid.Column="0" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,10,0">
+                        <ScrollViewer>
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Add New Stock Item" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                
+                                <TextBlock Text="Item Code (Numeric ID)" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtItemCode" PlaceholderText="e.g. 1006" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Description" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtItemDesc" PlaceholderText="e.g. Steel Pallet Racks" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Category" FontSize="11" Foreground="#94A3B8"/>
+                                <ComboBox x:Name="CmbItemCategory" HorizontalAlignment="Stretch" SelectedIndex="0">
+                                    <ComboBoxItem Content="Hardware"/>
+                                    <ComboBoxItem Content="Machinery"/>
+                                    <ComboBoxItem Content="Packaging"/>
+                                    <ComboBoxItem Content="Stationery"/>
+                                    <ComboBoxItem Content="Safety"/>
+                                </ComboBox>
+
+                                <Grid ColumnDefinitions="*, *">
+                                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                        <TextBlock Text="Quantity" FontSize="11" Foreground="#94A3B8"/>
+                                        <TextBox x:Name="TxtItemQty" PlaceholderText="e.g. 50" Background="#0F172A" Foreground="#FFFFFF"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                        <TextBlock Text="Safety Limit" FontSize="11" Foreground="#94A3B8"/>
+                                        <TextBox x:Name="TxtItemThreshold" PlaceholderText="e.g. 15" Background="#0F172A" Foreground="#FFFFFF"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <TextBlock Text="Unit Price (Rs.)" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtItemPrice" PlaceholderText="e.g. 18500" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Warehouse Location" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtItemLocation" PlaceholderText="e.g. B-08" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,10,0,0">
+                                    <Button x:Name="BtnAddItem" Content="Add Item" Background="#059669" Foreground="#FFFFFF" FontWeight="Bold" Padding="16,8" CornerRadius="6" Click="BtnAddItem_Click"/>
+                                    <Button x:Name="BtnRefreshInventory" Content="Refresh" Background="#475569" Foreground="#FFFFFF" Padding="12,8" CornerRadius="6" Click="BtnRefreshInventory_Click"/>
+                                </StackPanel>
+
+                                <TextBlock x:Name="TxtInventoryStatus" Text="" FontSize="11" Foreground="#34D399" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+
+                    <!-- Right: Inventory Data Grid -->
+                    <Border Grid.Column="1" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="12">
+                        <Grid RowDefinitions="Auto, *">
+                            <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Margin="4,0,4,8">
+                                <TextBlock Grid.Column="0" Text="Current Warehouse Stock Directory" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1" x:Name="BtnDeleteSelectedStock" Content="Delete Selected" Background="#DC2626" Foreground="#FFFFFF" Padding="10,6" CornerRadius="6" Click="BtnDeleteSelectedStock_Click"/>
+                            </Grid>
+                            <DataGrid Grid.Row="1" x:Name="GridInventory" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" Background="#0F172A">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Code" Binding="{Binding ItemCode}" Width="70"/>
+                                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="220"/>
+                                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="100"/>
+                                    <DataGridTextColumn Header="Quantity" Binding="{Binding QuantityOnHand}" Width="80"/>
+                                    <DataGridTextColumn Header="Safety Threshold" Binding="{Binding SafetyThreshold}" Width="110"/>
+                                    <DataGridTextColumn Header="Unit Price (Rs)" Binding="{Binding UnitPrice, StringFormat='{}{0:N2}'}" Width="110"/>
+                                    <DataGridTextColumn Header="Location" Binding="{Binding WarehouseLocation}" Width="80"/>
+                                    <DataGridCheckBoxColumn Header="Low Stock" Binding="{Binding IsLowStock}" Width="90"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 3: Commercial Customer Management -->
+            <TabItem Header="Customer Credit Control" FontSize="13" FontWeight="SemiBold">
+                <Grid ColumnDefinitions="360, *" Margin="10">
+                    <!-- Left: Register Customer Form -->
+                    <Border Grid.Column="0" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,10,0">
+                        <ScrollViewer>
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Register Commercial Customer" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                
+                                <TextBlock Text="Contact Name" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtCustName" PlaceholderText="e.g. Samantha Wickrama" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Company Name" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtCustCompany" PlaceholderText="e.g. Apex Engineering Ltd" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Email Address" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtCustEmail" PlaceholderText="e.g. samantha@apex.lk" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Phone Number" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtCustPhone" PlaceholderText="e.g. +94 77 345 6789" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Address" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtCustAddress" PlaceholderText="e.g. 15 Industrial Estate, Ekala" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Annual Turnover (Rs.)" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtCustTurnover" PlaceholderText="e.g. 750000" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,10,0,0">
+                                    <Button x:Name="BtnCalculateCreditPreview" Content="Preview Limit" Background="#0284C7" Foreground="#FFFFFF" Padding="10,8" CornerRadius="6" Click="BtnCalculateCreditPreview_Click"/>
+                                    <Button x:Name="BtnAddCustomer" Content="Register" Background="#059669" Foreground="#FFFFFF" FontWeight="Bold" Padding="16,8" CornerRadius="6" Click="BtnAddCustomer_Click"/>
+                                </StackPanel>
+
+                                <TextBlock x:Name="TxtCustomerStatus" Text="" FontSize="11" Foreground="#34D399" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+
+                    <!-- Right: Customer Data Grid -->
+                    <Border Grid.Column="1" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="12">
+                        <Grid RowDefinitions="Auto, *">
+                            <TextBlock Grid.Row="0" Text="Registered Commercial Customers Directory" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" Margin="4,0,4,8"/>
+                            <DataGrid Grid.Row="1" x:Name="GridCustomers" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" Background="#0F172A">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                                    <DataGridTextColumn Header="Contact Name" Binding="{Binding Name}" Width="130"/>
+                                    <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="160"/>
+                                    <DataGridTextColumn Header="Turnover (Rs)" Binding="{Binding AnnualTurnover, StringFormat='{}{0:N2}'}" Width="120"/>
+                                    <DataGridTextColumn Header="Credit Limit (Rs)" Binding="{Binding CreditLimit, StringFormat='{}{0:N2}'}" Width="120"/>
+                                    <DataGridTextColumn Header="Balance (Rs)" Binding="{Binding CurrentBalance, StringFormat='{}{0:N2}'}" Width="100"/>
+                                    <DataGridTextColumn Header="Available Credit" Binding="{Binding AvailableCredit, StringFormat='{}{0:N2}'}" Width="120"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 4: Staff Administration -->
+            <TabItem Header="Staff Administration" FontSize="13" FontWeight="SemiBold">
+                <Grid ColumnDefinitions="360, *" Margin="10">
+                    <!-- Left: Onboard Staff -->
+                    <Border Grid.Column="0" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,10,0">
+                        <ScrollViewer>
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Onboard Staff Account" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                
+                                <TextBlock Text="System Username" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtStaffUsername" PlaceholderText="e.g. kalinga" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Password" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtStaffPassword" PasswordChar="*" PlaceholderText="Password" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Full Name" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtStaffName" PlaceholderText="e.g. Kalinga Bandara" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Email Address" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtStaffEmail" PlaceholderText="e.g. kalinga@warehouse.local" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Department" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtStaffDept" PlaceholderText="e.g. Quality Assurance" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Salary (Rs.)" FontSize="11" Foreground="#94A3B8"/>
+                                <TextBox x:Name="TxtStaffSalary" PlaceholderText="e.g. 110000" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                                <TextBlock Text="Role Classification" FontSize="11" Foreground="#94A3B8"/>
+                                <ComboBox x:Name="CmbStaffRole" HorizontalAlignment="Stretch" SelectedIndex="0">
+                                    <ComboBoxItem Content="Warehouse Staff Member (Level 1)"/>
+                                    <ComboBoxItem Content="Warehouse Administrator (Level 3)"/>
+                                </ComboBox>
+
+                                <Button x:Name="BtnAddStaff" Content="Create Account" Background="#059669" Foreground="#FFFFFF" FontWeight="Bold" Padding="16,8" CornerRadius="6" Margin="0,10,0,0" Click="BtnAddStaff_Click"/>
+                                <TextBlock x:Name="TxtStaffStatus" Text="" FontSize="11" Foreground="#34D399" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+
+                    <!-- Right: Employees Data Grid -->
+                    <Border Grid.Column="1" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="12">
+                        <Grid RowDefinitions="Auto, *">
+                            <TextBlock Grid.Row="0" Text="Authorized Staff and Administrators" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" Margin="4,0,4,8"/>
+                            <DataGrid Grid.Row="1" x:Name="GridEmployees" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" Background="#0F172A">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                                    <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="100"/>
+                                    <DataGridTextColumn Header="Full Name" Binding="{Binding Name}" Width="150"/>
+                                    <DataGridTextColumn Header="Department" Binding="{Binding Department}" Width="130"/>
+                                    <DataGridTextColumn Header="Salary (Rs)" Binding="{Binding Salary, StringFormat='{}{0:N2}'}" Width="110"/>
+                                    <DataGridTextColumn Header="Role" Binding="{Binding RoleDescription}" Width="180"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 5: Authentication -->
+            <TabItem Header="User Authentication" FontSize="13" FontWeight="SemiBold">
+                <Grid ColumnDefinitions="*, 420, *" Margin="10">
+                    <Border Grid.Column="1" Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="24" VerticalAlignment="Center">
+                        <StackPanel Spacing="14">
+                            <TextBlock Text="System Authentication" FontSize="16" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Enter authorized credentials to verify role-based permissions." FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+
+                            <TextBlock Text="Username" FontSize="11" Foreground="#94A3B8"/>
+                            <TextBox x:Name="TxtAuthUsername" Text="admin" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                            <TextBlock Text="Password" FontSize="11" Foreground="#94A3B8"/>
+                            <TextBox x:Name="TxtAuthPassword" Text="admin123" PasswordChar="*" Background="#0F172A" Foreground="#FFFFFF"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12" Margin="0,10,0,0">
+                                <Button x:Name="BtnLogin" Content="Log In" Background="#2563EB" Foreground="#FFFFFF" FontWeight="Bold" Padding="20,8" CornerRadius="6" Click="BtnLogin_Click"/>
+                                <Button x:Name="BtnQuickOperator" Content="Switch to Operator" Background="#475569" Foreground="#FFFFFF" Padding="12,8" CornerRadius="6" Click="BtnQuickOperator_Click"/>
+                            </StackPanel>
+
+                            <Border x:Name="BorderAuthResult" Background="#0F172A" BorderBrush="#334155" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,10,0,0">
+                                <TextBlock x:Name="TxtAuthStatus" Text="Ready for authentication." FontSize="12" Foreground="#38BDF8" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
